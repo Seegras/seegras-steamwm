@@ -3,9 +3,10 @@
 
 **DISCLAIMER: Use at your own risk! This is in no way endorsed by VALVE.**
 
-These files are mirrored on both [GitHub](https://github.com/dscharrer/steamwm) and [Gist](https://gist.github.com/06d6b6a5370c4f6979f3) - use whichever you prefer.
+Forked from [GitHub](https://github.com/dscharrer/steamwm)
 
-Feature request for these changes to be implemented in Steam: [issue #1040](https://github.com/ValveSoftware/steam-for-linux/issues/1040)
+Feature request for these changes to be implemented in Steam: 
+[issue #1040](https://github.com/ValveSoftware/steam-for-linux/issues/1040)
 
 ## steamwm.cpp
 
@@ -28,17 +29,28 @@ Obsolete fixes (now disabled by default):
 * Set `_NET_WM_NAME` to the `WM_NAME` value to get better window titles.
 * Set fixed size hints for windows with a fixed layout.
 
-Fixes can be individually enabled or disabled - for details see the comments in the source file.
+Fixes can be individually enabled or disabled - for details see the 
+comments in the source file.
 
-This file compiles to a library that can be `LD_PRELOAD`ed into the Steam process. For your convenience it is also its own build and wrapper script.
+This file compiles to a library that can be `LD_PRELOAD`ed into the 
+Steam process. For your convenience there's also a wrapper-script
+supplied.
 
 Requires: `g++` with support for x86 targets, `Xlib` + headers
 
 Use:
 
-    $ chmod +x steamwm.cpp
-    $ ./steamwm.cpp steam
+    $ make 
+    $ export LD_PRELOAD="steamwm.so:${LD_PRELOAD}"
+    $ export LD_LIBRARY_PATH="lib32:lib64:${LD_LIBRARY_PATH}"
+    $ steam
 
+Or copy around lib32 and lib64 to ~/lib and use the supplied 
+steam.sh script:
+
+    $ make 
+    $ make install
+    $ bin/steam.sh
 
 ## noframe.patch
 
